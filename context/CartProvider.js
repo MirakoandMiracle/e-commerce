@@ -12,10 +12,27 @@ const CartProvider = ({children}) => {
     const [cartProducts, setCartProducts] = useState([]);
     const [cartCount, setCartCount] = useState(0)
     const [isOpenCartPanel, setIsOpenCartPanel] = useState(false);
+    const [cartCalculate, setCartCalculate] = useState(0);
+
+
+
 
     useEffect(() => {
      setCartCount(cartProducts.length)
     }, [cartProducts])
+
+
+    useEffect(() => {
+      let cartTotalCost = 0;
+      cartProducts.forEach((product) => {
+        const eachProductCost = product.discountAmount
+          ? product.discountAmount * product.orderQuantity
+          : product.price * product.orderQuantity;
+        cartTotalCost += eachProductCost;
+      });
+      console.log({ cartTotalCost });
+      setCartCalculate(cartTotalCost)
+    }, [cartProducts]);
     
     const cartUpdate = (update_product) => {
       console.log(update_product);
@@ -37,8 +54,14 @@ const addCard =(product) =>{
         setCartProducts([...cartProducts, product])
     }
 }
+
+const removeCart=(product_id)=>{
+  const deletedProduct=  cartProducts.filter(product=>product.id !==product_id)
+  setCartProducts([...deletedProduct])
+  }
+
   return (
-<CartContext.Provider value={{cartProducts, addCard, cartCount , setIsOpenCartPanel , isOpenCartPanel , cartUpdate}}>{children }</CartContext.Provider>
+<CartContext.Provider value={{cartProducts, addCard, cartCount , setIsOpenCartPanel , isOpenCartPanel , cartUpdate ,cartCalculate, removeCart }}>{children }</CartContext.Provider>
   )
 }
 

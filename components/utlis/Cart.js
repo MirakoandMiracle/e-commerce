@@ -9,6 +9,11 @@ const Cart = ({product}) => {
   const { addCard }= useContext(CartContext);
   const onClickAddCart =()=>{
 product.orderQuantity = 1;
+if (product.discountPercentage) {
+  product.discountAmount = Math.round(
+    product.price - product.price * (product.discountPercentage / 100)
+  );
+}
 addCard(product);
 
 
