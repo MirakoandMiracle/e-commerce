@@ -12,9 +12,9 @@ const ProductCard = ({ product }) => {
             <Cart product={product}/>
           </button>
           <div className="relative">
-            <button className="absolute top-2 right-2">
-              <Favorite />
-            </button>
+          
+              <Favorite  product={product}/>
+            
             <Image
               width={450}
               height={250}

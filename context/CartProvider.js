@@ -30,12 +30,31 @@ const CartProvider = ({children}) => {
           : product.price * product.orderQuantity;
         cartTotalCost += eachProductCost;
       });
-      console.log({ cartTotalCost });
+      // console.log({ cartTotalCost });
       setCartCalculate(cartTotalCost)
     }, [cartProducts]);
     
+
+    const AddAllFavoriteProductsToCart = (favoriteProducts) => {
+      debugger;
+      let checkFavoriteProducts = [];
+      favoriteProducts.forEach((product) => {
+        const isExit = cartProducts.find((p) => p.id == product.id);
+        if (!isExit) {
+          product.orderQuantity = 1;
+          if (product.discountPercentage) {
+            product.discountAmount = Math.round(
+              product.price - product.price * (product.discountPercentage / 100)
+            );
+          }
+          checkFavoriteProducts.push(product);
+        }
+      });
+      setCartProducts([...cartProducts, ...checkFavoriteProducts]);
+    };
+    
     const cartUpdate = (update_product) => {
-      console.log(update_product);
+      // console.log(update_product);
      const updatedProducts= cartProducts.map(product=>{
         if(product.id == update_product.id){
           return update_product
@@ -61,7 +80,7 @@ const removeCart=(product_id)=>{
   }
 
   return (
-<CartContext.Provider value={{cartProducts, addCard, cartCount , setIsOpenCartPanel , isOpenCartPanel , cartUpdate ,cartCalculate, removeCart }}>{children }</CartContext.Provider>
+<CartContext.Provider value={{cartProducts, addCard, cartCount , setIsOpenCartPanel , isOpenCartPanel , cartUpdate ,cartCalculate, removeCart , AddAllFavoriteProductsToCart}}>{children }</CartContext.Provider>
   )
 }
 

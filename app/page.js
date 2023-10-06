@@ -8,7 +8,7 @@ import ProductProvider from "@/context/ProductProvider";
 
 export default function Home() {
   return (
-      <ProductProvider>
+
     
         
 <main >
@@ -21,7 +21,7 @@ export default function Home() {
   </div>
   </main>
   
-      </ProductProvider>
+  
    
   )
 }
