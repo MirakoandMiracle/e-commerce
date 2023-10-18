@@ -18,7 +18,7 @@ const CartProductAction = ({ product }) => {
       };
   return (
     <div className="flex gap-3 mt-3">
-      <div>
+      
 
         <button onClick={onMinusQuantity} disabled={product.orderQuantity == 1}>
         <AiOutlineMinus size={26} className={`${
@@ -26,7 +26,7 @@ const CartProductAction = ({ product }) => {
           }`} />
         </button>
        
-      </div>
+      
       <p>{product.orderQuantity}</p>
       <button
         onClick={onAddQuantity}
