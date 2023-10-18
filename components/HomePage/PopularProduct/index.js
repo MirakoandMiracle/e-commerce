@@ -13,7 +13,7 @@ const PopularProduct = () => {
           <h2 className="text-lg font-semibold">Popular Products</h2>
         <div className="flex flex-wrap gap-y-5 mt-5 ">
           {popularProducts.map((product) => (
-            <ProductCard ProductCardkey={product.title + product.id} product={product}/>
+            <ProductCard key={product.title + product.id} product={product}/>
           ))}
         </div>
       </section>
